@@ -14,8 +14,9 @@ while chocolate_machine_active:
         print('That is not a valid selection...\n')
     if choice == 'shutdown':
         entered_password = input('ENTER SHUTDOWN PASSWORD: ')
-        not_authorized = chocolate_machine.shutdown_machine('8675309', entered_password)
-        if not_authorized:
+        if not_authorized := chocolate_machine.shutdown_machine(
+            '8675309', entered_password
+        ):
             print(not_authorized)
         else:
             chocolate_machine_active = False
@@ -37,14 +38,12 @@ while chocolate_machine_active:
                 print(money_collected)
             else:
                 change = chocolate_machine.has_enough_money(selection['price'])
-                if change == 'Insufficient funds...  Dispensing coins inserted.\n':
-                    print(change)
-                else:
+                if (
+                    change
+                    != 'Insufficient funds...  Dispensing coins inserted.\n'
+                ):
                     chocolate_bar = chocolate_machine.bake_chocolate_bar(choice, selection['ingredients'],
                                                                          raw_materials)
                     print(chocolate_bar)
-                    print(change)
-    elif valid_choice:
-        chocolate_machine_active = False
-
+                print(change)
 print('We are going down for maintenance...')

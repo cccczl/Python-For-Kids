@@ -17,9 +17,7 @@ def guess_number(f_guess, f_turns_left):
         if f_guess < 1 or f_guess > 9:
             raise ValueError
         return f_guess, f_turns_left - 1
-    except ValueError:
-        return '\nRULES: Please enter a number between 1 and 9.', f_turns_left - 1
-    except TypeError:
+    except (ValueError, TypeError):
         return '\nRULES: Please enter a number between 1 and 9.', f_turns_left - 1
 
 
@@ -42,9 +40,7 @@ def did_win(f_guess, f_correct_answer):
             return 'HINT: Higher Than {0}'.format(f_guess)
         else:
             return 'You won!'
-    except ValueError:
-        return '\nRULES: Please enter a number between 1 and 9.'
-    except TypeError:
+    except (ValueError, TypeError):
         return '\nRULES: Please enter a number between 1 and 9.'
 
 

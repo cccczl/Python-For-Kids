@@ -41,9 +41,7 @@ class AssertRaisesContext:
         """
         if exc_type is None:
             assert False, '%r not raised' % self.expected
-        if issubclass(exc_type, self.expected):
-            return True 
-        return False
+        return issubclass(exc_type, self.expected)
 
 
 class TestCase:
@@ -136,23 +134,23 @@ class TestCase:
         """
         if delta is not None and places is not None:
             raise TypeError("specify delta or places not both")
-            
+
         if delta is not None:
-            if not (x == y) and abs(x - y) > delta:
+            if x != y and abs(x - y) > delta:
                 return
-            
+
             if not msg:
                 msg = '%r == %r within %r delta' % (x, y, delta)
         else:
             if places is None:
                 places = 7
-                
-            if not (x == y) and round(abs(y-x), places) != 0:
+
+            if x != y and round(abs(y - x), places) != 0:
                 return
-            
+
             if not msg:
                 msg = '%r == %r within %r places' % (x, y, places)
-                
+
         assert False, msg
 
     def assertIs(self, x, y, msg=''):
@@ -328,9 +326,7 @@ def skipIf(cond, msg):
     Returns:
         object
     """
-    if not cond:
-        return lambda x: x
-    return skip(msg)
+    return (lambda x: x) if not cond else skip(msg)
 
 
 def skipUnless(cond, msg):
@@ -344,9 +340,7 @@ def skipUnless(cond, msg):
     Returns:
         object
     """
-    if cond:
-        return lambda x: x
-    return skip(msg)
+    return (lambda x: x) if cond else skip(msg)
 
 
 class TestSuite:
@@ -430,14 +424,14 @@ def run_class(c, test_result):
     o = c()
     set_up = getattr(o, 'setUp', lambda: None)
     tear_down = getattr(o, 'tearDown', lambda: None)
-    
+
     for name in dir(o):
         if name.startswith('test'):
-            print('%s (%s) ...' % (name, c.__qualname__), end='')
-            
+            print(f'{name} ({c.__qualname__}) ...', end='')
+
             m = getattr(o, name)
             set_up()
-            
+
             try:
                 test_result.testsRun += 1
                 m()

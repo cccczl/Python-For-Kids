@@ -49,8 +49,7 @@ class Player:
         Returns:
             str
         """
-        inventory = file_manager.read_inventory_file()
-        return inventory
+        return file_manager.read_inventory_file()
     
     def move_east(self, grid):
         """

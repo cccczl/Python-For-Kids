@@ -16,9 +16,7 @@ def guess_number(f_guess, f_turns_left):
         if f_guess < 1 or f_guess > 9:
             raise ValueError
         return f_guess, f_turns_left - 1
-    except ValueError:
-        return '\nRULES: Please enter a number between 1 and 9.', f_turns_left - 1
-    except TypeError:
+    except (ValueError, TypeError):
         return '\nRULES: Please enter a number between 1 and 9.', f_turns_left - 1
 
 
@@ -63,11 +61,10 @@ while guess != correct_answer:
 
     if isinstance(guess_response, str):
         print(guess_response)
-    else:
-        if turns_left:
-            game_status, turns_left = did_win(guess_response, correct_answer, turns_left)
-            if game_status == 'You won!':
-                print(game_status)
-                break
-            else:
-                print(game_status)
+    elif turns_left:
+        game_status, turns_left = did_win(guess_response, correct_answer, turns_left)
+        if game_status == 'You won!':
+            print(game_status)
+            break
+        else:
+            print(game_status)

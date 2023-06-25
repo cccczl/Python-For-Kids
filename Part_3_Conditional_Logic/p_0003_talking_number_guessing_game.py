@@ -15,29 +15,23 @@ display.show(Image.HAPPY)
 
 while True:
     display.show(number_position)
-    
+
     if button_a.was_pressed():
-        if number_position == 9:
-            pass
-        else:
+        if number_position != 9:
             number_position += 1
             display.show(number_position)
-            
+
     if button_b.was_pressed():
-        if number_position == 1:
-            pass
-        else:
+        if number_position != 1:
             number_position -= 1
             display.show(number_position)
-     
+
     if pin_logo.is_touched():
+        display.show(Image.SURPRISED)
         if number_position == random_number:
-            display.show(Image.SURPRISED)
             say('Correct!', speed=SPEED)
-            display.show(Image.HAPPY)
-            break
         else:
-            display.show(Image.SURPRISED)
             say('The number I chose is {0}.'.format(random_number), speed=SPEED)
-            display.show(Image.HAPPY)
-            break
+
+        display.show(Image.HAPPY)
+        break

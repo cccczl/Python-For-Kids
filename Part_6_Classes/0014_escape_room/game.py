@@ -35,8 +35,7 @@ class Game:
         Returns:
             int
         """
-        x = randint(1, grid.available_width)
-        return x
+        return randint(1, grid.available_width)
 
     @staticmethod
     def __generate_random_numbers(grid):
@@ -165,17 +164,16 @@ class Game:
                     music.play(music.POWER_UP)
                     display.show(Image.ALL_CLOCKS, loop=False, delay=100)
                     return True
-                elif 'Red Key' not in player.inventory and not self.final_question:
+                elif not self.final_question:
                     receive_red_key = self.__generate_random_number(grid)
                     if receive_red_key == 2:
                         display.show(Image.SURPRISED)
                         say(player.pick_up_red_key(self.file_manager), speed=self.SAY_SPEED)
                         self.final_question = True
-                        return False
                     else:
                         display.show(Image.SURPRISED)
                         say(player.without_red_key(), speed=self.SAY_SPEED)
-                        return False
+                    return False
             else:
                 display.show(Image.SURPRISED)
                 say(self.__incorrect_answer_response(), speed=self.SAY_SPEED)

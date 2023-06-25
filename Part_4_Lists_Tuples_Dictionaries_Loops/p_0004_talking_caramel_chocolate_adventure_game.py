@@ -14,7 +14,7 @@ for room in range(1, len(chocolates) + 1):
     random_chocolate = choice(chocolates)
     rooms[room] = random_chocolate
     chocolates.remove(random_chocolate)
-    
+
 display.show(Image.SURPRISED)
 say('Welcome to the Talking Caramel Chocolate Adventure Game!', speed=SPEED)
 display.show(Image.HAPPY)
@@ -38,19 +38,15 @@ display.show(Image.SURPRISED)
 say('Let the games begin!', speed=SPEED)
 display.show(Image.HAPPY)
 sleep(1)
- 
+
 while guesses > 0:
     display.show(room_number)
     if button_a.was_pressed():
-        if room_number == 5:
-            pass
-        else:
+        if room_number != 5:
             room_number += 1
-            display.show(room_number)   
+            display.show(room_number)
     if button_b.was_pressed():
-        if room_number == 1:
-            pass
-        else:
+        if room_number != 1:
             room_number -= 1
             display.show(room_number)
     if pin_logo.is_touched():
@@ -65,15 +61,13 @@ while guesses > 0:
             display.show(Image.HAPPY)
             sleep(1)
             guesses -= 1
-            
+
+display.show(Image.SURPRISED)
 if guesses <= 0:
-    display.show(Image.SURPRISED)
     say('Sorry about that.  Please try again by click the reset button.', speed=SPEED)
-    display.show(Image.HAPPY)
-    sleep(1)
 else:
-    display.show(Image.SURPRISED)
     say('Click the reset button to play again.', speed=SPEED)
-    display.show(Image.HAPPY)
-    sleep(1)
+
+display.show(Image.HAPPY)
+sleep(1)
 
