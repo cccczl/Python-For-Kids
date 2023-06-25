@@ -37,12 +37,13 @@ while machine_active:
                 print(money)
             else:
                 change = has_enough_money(money, selection['price'], total_money_collected)
-                if change == 'Insufficient funds...  Dispensing coins inserted.\n':
-                    print(change)
-                else:
+                if (
+                    change
+                    != 'Insufficient funds...  Dispensing coins inserted.\n'
+                ):
                     chocolate_bar = bake_chocolate_bar(choice, selection['ingredients'], raw_materials)
                     print(chocolate_bar)
-                    print(change)
+                print(change)
         else:
             machine_active = False
 

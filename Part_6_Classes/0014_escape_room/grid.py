@@ -26,10 +26,10 @@ class Grid:
             str, str, str
         """
         top_wall = self.led_on * self.led_width + '\n'
-        side_walls = ''
-        for _ in range(self.available_height):
-            side_walls += self.led_on + self.led_off * \
-                self.available_width + self.led_on + '\n'
+        side_walls = ''.join(
+            self.led_on + self.led_off * self.available_width + self.led_on + '\n'
+            for _ in range(self.available_height)
+        )
         bottom_wall = self.led_on * self.led_width
         return top_wall, side_walls, bottom_wall
 
@@ -45,19 +45,17 @@ class Grid:
             grid: str
         """
         top_wall, side_walls, bottom_wall = self.__create()
-        
+
         grid = top_wall + side_walls + bottom_wall + '\n'
-        
+
         # Convert to a list so that the element can be mutable to add player char
         temp_grid = list(grid)
-        
+
         # For each step in y, needs to increment by jumps of row width plus the \n separating rows
         y_adjustment = (player.dy - 1) * (self.led_width + 1)
-        
+
         # The index position of player marker in the list-formatted grid
         position = self.led_width + 1 + player.dx + y_adjustment
         temp_grid[position] = self.led_on
         grid = ''
-        grid = grid.join(temp_grid)
-        
-        return grid
+        return grid.join(temp_grid)

@@ -9,14 +9,12 @@ def has_raw_materials(f_raw_materials, d_raw_materials):
     Returns:
         str or bool
     """
-    additional_resources_needed = ''
-    for f_raw_material in f_raw_materials:
-        if f_raw_materials[f_raw_material] > d_raw_materials[f_raw_material]:
-            additional_resources_needed += 'Machine Needs Additional: {0}\n'.format(f_raw_material)
-    if additional_resources_needed:
-        return additional_resources_needed
-    else:
-        return True
+    additional_resources_needed = ''.join(
+        'Machine Needs Additional: {0}\n'.format(f_raw_material)
+        for f_raw_material in f_raw_materials
+        if f_raw_materials[f_raw_material] > d_raw_materials[f_raw_material]
+    )
+    return additional_resources_needed if additional_resources_needed else True
 
 
 def collect_money(f_max_value, f_quarters, f_dimes, f_nickels):
@@ -88,8 +86,9 @@ def stats(d_raw_materials, f_total_money_collected):
     Returns:
         str
     """
-    cm_stats = 'sugar {0} tablespoons remaining\n'.format(d_raw_materials['sugar'])
-    cm_stats += 'butter {0} teaspoons remaining\n'.format(d_raw_materials['butter'])
+    cm_stats = 'sugar {0} tablespoons remaining\n'.format(
+        d_raw_materials['sugar']
+    ) + 'butter {0} teaspoons remaining\n'.format(d_raw_materials['butter'])
     cm_stats += 'dark chocolate {0} tablespoons remaining\n'.format(d_raw_materials['dark chocolate'])
     cm_stats += 'mint chocolate {0} tablespoons remaining\n'.format(d_raw_materials['mint chocolate'])
     cm_stats += 'milk chocolate {0} tablespoons remaining\n'.format(d_raw_materials['milk chocolate'])

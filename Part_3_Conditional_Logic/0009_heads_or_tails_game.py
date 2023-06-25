@@ -9,15 +9,12 @@ while True:
     if button_a.is_pressed():
         if random_number == 1:
             display.scroll('You WON!')
-            break
         else:
             display.scroll('You Lost')
-            break
-        
+        break
     if button_b.is_pressed():
         if random_number == 2:
             display.scroll('You WON!')
-            break
         else:
             display.scroll('You Lost')
-            break
+        break

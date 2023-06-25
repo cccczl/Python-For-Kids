@@ -1,8 +1,8 @@
 from microbit import *
-	
 
-	name = 'Kevin'
-	
 
-	while True:
-	    display.scroll('Hi ' + name + '!')
+name = 'Kevin'
+
+
+while True:
+	display.scroll(f'Hi {name}!')
